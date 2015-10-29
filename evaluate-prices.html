@@ -26,11 +26,11 @@
     </div>
   </nav>
 
-  <div class="container">
+  <div class="container-fluid">
 		<h4 id="goal-text" class="text-center">Overall Goal <small>1000 clicks</small></h4>
-	  	<div class="progress">
-		  <div id="total-clicks" class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="1000">
-		  </div>
+	  <div class="progress" style="margin-right: 300px; margin-left: 300px;">
+		  <div id="total-clicks" class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="1000">
+		</div>
 		</div>
 		<div class="row">
 		  <div class="col-md-3">
@@ -38,55 +38,47 @@
 		  	<img id="prev-img" src="thumbnail-default.jpg" alt="..." class="img-thumbnail" style="width:250px; height:150px; display:block; margin:auto;">
 		  	<h4 class="text-center"><a id="prev-website-url" target="_blank" href="http://price-wars.meteor.com">Website</a></h4>
 		  	<br>
-		  	<p class="text-center"><u>What Others Think</u></p>
-		  	<!-- <div class="progress">
-  			  <div class="progress-bar progress-bar-info" style="width: 20%">
-  			    <span class="sr-only">35% Complete (success)</span>Econ.
+		  	<h5 class="text-center"><u>What Others Think</u></h5>
+		  	<div class="progress" style="margin-right:20px; margin-left:20px; height:10px;">
+  			  <div id='progress-econ' class="progress-bar progress-bar-info">
   			  </div>
-  			  <div class="progress-bar progress-bar-warning" style="width: 30%">
-  			    <span class="sr-only">20% Complete (warning)</span>I.B.
+  			  <div id='progress-ib' class="progress-bar progress-bar-warning">
   			  </div>
-  			  <div class="progress-bar progress-bar-success" style="width: 50%">
-  			    <span class="sr-only">10% Complete (danger)</span>Lux.
+  			  <div id='progress-lux' class="progress-bar progress-bar-danger">
   			  </div>
-  			</div> -->
-        <p class="text-center">Economy <strong id='num-econ'></strong></p>
-        <p class="text-center">Premium <strong id='num-ib'></strong></p>
-        <p class="text-center">Luxury <strong id='num-lux'></strong></p>
-      <br>
-      <p class="text-center"><u>Actual</u></p>
-      <h4 class="text-center"><mark><em id="actual_price_category"></em></mark></h4>
+  			</div>
+        <p class="text-center">Economy <small id='num-econ' class="economy-label"></small></p>
+        <p class="text-center">Premium <small id='num-ib' class="premium-label"></small></p>
+        <p class="text-center">Luxury <small id='num-lux' class="luxury-label"></small></p>
+        <br>
+        <h5 class="text-center"><u>Actual</u></h5>
+        <h5 class="text-center" id="actual_price_category"><mark><em ></em></mark></h5>
 		  </div>
 		  <div class="col-md-6">
-		 	<img id="curr-img" src="https://s3-us-west-1.amazonaws.com/cs598rkwatches/blurred/A.+Lange+%26+Söhne+(Richemont+Group)_censored.jpg" alt="..." class="img-thumbnail" style="width:550px; height:325px; display:block; margin:auto;">
-			<br>
-			<br>
-			<input id="slider" data-slider-id='slider' type="text" data-slider-min="0" data-slider-max="2" data-slider-step="1" data-slider-value="0"/>
-			<br>
-			<button id="submit_btn" type="button" class="btn btn-success" style="display:block; margin:auto;">Submit</button>
+  		 	<img id="curr-img" src="https://s3-us-west-1.amazonaws.com/cs598rkwatches/blurred/A.+Lange+%26+Söhne+(Richemont+Group)_censored.jpg" alt="..." class="img-thumbnail" style="width:100%; height:100%; display:block; margin:auto;">
+  			<br>
+  			<br>
+  			<input id="slider" data-slider-id='slider' type="text" data-slider-min="0" data-slider-max="2" data-slider-step="1" data-slider-value="0"/>
+  			<br>
+  			<button id="submit_btn" type="button" class="btn btn-success" style="display:block; margin:auto;">Submit</button>
 		  </div>
-		  <div class="col-md-3Ta">
-		  	<dl>
-			  <dt>How do I play?</dt>
-			  <dd>A screenshot of a brand's website will appear in the middle and you have select what price level the brand falls under. There is no incorrect answer, just let us know what you think!</dd>
-			  <br>
-			  <dt>What are the different price levels?</dt>
-			  <dd><em>Economy</em> - consumer, value brands</dd>
-			  <br>
-			  <dd><em>Premium</em> - may be higher than economy but lower than luxury?</dd>
-			  <br>
-			  <dd><em>Luxury</em> - high end, designer brands</dd>
-			  <br>
-			  <dt>Why should I play?</dt>
-			  <dd>With every question you answer, we will provide you with some very interesting insights on how your peers think about these brands!</dd>
-			</dl>
+		  <div class="col-md-3">
+		  	<dl style="font-size: 13px;">
+  			  <dt><u>How do I play?</u></dt>
+  			  <dd>A screenshot of a brand's website will appear in the middle and you have select what price level the brand falls under. There is no incorrect answer, just let us know what you think!</dd>
+  			  <br>
+  			  <dt><u>What are the different price levels?</u></dt>
+  			  <dd><em>Economy</em> - consumer, value brands</dd>
+  			  <br>
+  			  <dd><em>Premium</em> - may be higher than economy but lower than luxury?</dd>
+  			  <br>
+  			  <dd><em>Luxury</em> - high end, designer brands</dd>
+  			  <br>
+  			  <dt><u>Why should I play?</u></dt>
+  			  <dd>With every question you answer, we will provide you with some very interesting insights on how your peers think about these brands!</dd>
+  			</dl>
 		  </div>
 		</div>
-
-    <br>
-<br>
-<br>
-<br>
 </div> <!-- /container -->
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>

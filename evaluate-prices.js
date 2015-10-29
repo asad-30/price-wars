@@ -31,9 +31,17 @@ if (Meteor.isClient) {
       var previousBrand = Brands.findOne({bid: currentBrandID});
 
       var prevCount = Tasks.find({bid: currentBrandID});
-      $('#num-econ').html(Tasks.find({bid: currentBrandID, price_category: "Economy"}).count());
-      $('#num-ib').html(Tasks.find({bid: currentBrandID, price_category: "In Between"}).count());
-      $('#num-lux').html(Tasks.find({bid: currentBrandID, price_category: "Luxury"}).count());
+      var econ_count = Tasks.find({bid: currentBrandID, price_category: "Economy"}).count();
+      var ib_count = Tasks.find({bid: currentBrandID, price_category: "Premium"}).count();
+      var lux_count = Tasks.find({bid: currentBrandID, price_category: "Luxury"}).count();
+      var total_count = econ_count + ib_count + lux_count;
+      $('#num-econ').html(econ_count);
+      $('#num-ib').html(ib_count);
+      $('#num-lux').html(lux_count);
+      $('#progress-econ').attr( 'style', 'width:' + String(econ_count/total_count * 100) + "%");
+      $('#progress-ib').attr( 'style', 'width:' + String(ib_count/total_count * 100) + "%");
+      $('#progress-lux').attr( 'style', 'width:' + String(lux_count/total_count * 100) + "%");
+
 
       currentBrandID++;
 
@@ -45,7 +53,7 @@ if (Meteor.isClient) {
       $('#prev-img').attr('src', previousBrand.img_url);
       $('#prev-website-url').html(previousBrand.name);
       $('#prev-website-url').attr('href', previousBrand.website_url);
-      $('#actual_price_category').text(previousBrand.actual_price_category);
+      $('#actual_price_category').html('<mark class="'+previousBrand.actual_price_category.toLowerCase()+'-label"><em>'+previousBrand.actual_price_category+'</em></mark><small>');
 
       Session.set('currBid', currentBrandID);
     }
