@@ -103,7 +103,14 @@
   var currentBrandID = 1;
 
   $( window ).load(function() {
-    console.log( Tasks.find({}).count() );
+    $('#total-clicks').html( Tasks.find({}).count() + " clicks!");
+    var currentBrand = Brands.findOne({bid: String(1)});
+
+    $("#prev-img").attr('src', currentBrand.img_url);
+    $('#prev-name').html(currentBrand.name);
+
+    $("#curr-img").attr('src', currentBrand.img_url);
+    $('#img-head').html(currentBrand.name);
   });
 
   var currentSliderValue = "Economy";

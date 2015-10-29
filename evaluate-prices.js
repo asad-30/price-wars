@@ -19,7 +19,7 @@ if (Meteor.isClient) {
     'click #submit_btn' : function() {
 
       Tasks.insert({bid: currentBrandID, price_category: currentSliderValue});
-      $('#total-clicks').html(Tasks.find({}).count() + "clicks!");
+      $('#total-clicks').html(Tasks.find({}).count() + " clicks!");
 
       var previousBrand = Brands.findOne({bid: String(currentBrandID)});
       currentBrandID++;
