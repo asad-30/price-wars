@@ -50,7 +50,14 @@
 			    <span class="sr-only">10% Complete (danger)</span>Lux.
 			  </div>
 			</div>
-			<h4 class="text-center">Actual: <mark><em>Luxury</em></mark></h4>
+
+      <div id='numbers'>
+          <h5 id='num-econ'></h5>
+          <h5 id='num-ib'></h5>
+          <h5 id='num-lux'></h5>
+      </div>
+
+      <h4 class="text-center">Actual: <mark><em>Luxury</em></mark></h4>
 		  </div>
 		  <div class="col-md-6">
       <h2 id="img-head"></h2>
@@ -85,16 +92,6 @@
 <br>
 </div> <!-- /container -->
 
-
-  <div class="container">
-    <ul>
-      {{#each brands}}
-        <li>{{name}}</li>
-        <a href="http://{{url}}">{{url}}</a>
-      {{/each}}
-    </ul>
-  </div>
-
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
 <script src="bootstrap-slider.js"></script>
@@ -104,6 +101,7 @@
 
   $( window ).load(function() {
     $('#total-clicks').html( Tasks.find({}).count() + " clicks!");
+    $('#total-clicks').attr( 'style', 'width:' + String( (Tasks.find({}).count()/1000)*100 ) + "%");
     var currentBrand = Brands.findOne({bid: String(1)});
 
     $("#prev-img").attr('src', currentBrand.img_url);

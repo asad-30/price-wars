@@ -22,6 +22,14 @@ if (Meteor.isClient) {
       $('#total-clicks').html(Tasks.find({}).count() + " clicks!");
 
       var previousBrand = Brands.findOne({bid: String(currentBrandID)});
+
+      /* Analysis */
+      var prevCount = Tasks.find({bid: String(currentBrandID)});
+      $('#num-econ').html("Economy: " + Tasks.find({bid: currentBrandID, price_category: "Economy"}).count());
+      $('#num-ib').html("In Between: " + Tasks.find({bid: currentBrandID, price_category: "In Between"}).count());
+      $('#num-lux').html("Luxury: " + Tasks.find({bid: currentBrandID, price_category: "Luxury"}).count());
+
+
       currentBrandID++;
 
       $('#prev-name').html(previousBrand.name);
