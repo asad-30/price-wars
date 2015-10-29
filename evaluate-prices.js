@@ -19,29 +19,34 @@ if (Meteor.isClient) {
     'click #submit_btn' : function() {
 
       Tasks.insert({bid: currentBrandID, price_category: currentSliderValue});
-      $('#total-clicks').html(Tasks.find({}).count() + " clicks!");
+      var totalBrands = Brands.find({}).count();
 
-      var previousBrand = Brands.findOne({bid: String(currentBrandID)});
+      $('#goal-text').html('Your Goal <small>' + String(totalBrands - currentBrandID) + ' clicks</small>');
+      $('#total-clicks').html('');
+      $('#total-clicks').attr('aria-valuenow', currentBrandID);
+      $('#total-clicks').attr('aria-valuemax', totalBrands);
+      $('#total-clicks').attr( 'style', 'width:' + String(currentBrandID/totalBrands * 100) + "%");
 
-      /* Analysis */
-      var prevCount = Tasks.find({bid: String(currentBrandID)});
-      $('#num-econ').html("Economy: " + Tasks.find({bid: currentBrandID, price_category: "Economy"}).count());
-      $('#num-ib').html("In Between: " + Tasks.find({bid: currentBrandID, price_category: "In Between"}).count());
-      $('#num-lux').html("Luxury: " + Tasks.find({bid: currentBrandID, price_category: "Luxury"}).count());
 
+      var previousBrand = Brands.findOne({bid: currentBrandID});
+
+      var prevCount = Tasks.find({bid: currentBrandID});
+      $('#num-econ').html(Tasks.find({bid: currentBrandID, price_category: "Economy"}).count());
+      $('#num-ib').html(Tasks.find({bid: currentBrandID, price_category: "In Between"}).count());
+      $('#num-lux').html(Tasks.find({bid: currentBrandID, price_category: "Luxury"}).count());
 
       currentBrandID++;
-
-      $('#prev-name').html(previousBrand.name);
 
       if(currentBrandID >= Brands.find({}).count())
         currentBrandID = 1;
 
-      var currentBrand = Brands.findOne({bid: String(currentBrandID)});
-      $("#curr-img").attr('src', currentBrand.img_url);
+      var currentBrand = Brands.findOne({bid: currentBrandID});
+      $("#curr-img").attr('src', currentBrand.blurred_img_url);
       $('#prev-img').attr('src', previousBrand.img_url);
+      $('#prev-website-url').html(previousBrand.name);
+      $('#prev-website-url').attr('href', previousBrand.website_url);
+      $('#actual_price_category').text(previousBrand.actual_price_category);
 
-      $('#img-head').html(currentBrand.name);
       Session.set('currBid', currentBrandID);
     }
   })
