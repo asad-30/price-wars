@@ -53,7 +53,8 @@ if (Meteor.isClient) {
       $('#prev-img').attr('src', previousBrand.img_url);
       $('#prev-website-url').html(previousBrand.name);
       $('#prev-website-url').attr('href', previousBrand.website_url);
-      $('#actual_price_category').html('<mark class="'+previousBrand.actual_price_category.toLowerCase()+'-label"><em>'+previousBrand.actual_price_category+'</em></mark><small>');
+      // $('#actual_price_category').html('<mark class="'+previousBrand.actual_price_category.toLowerCase()+'-label"><em>'+previousBrand.actual_price_category+'</em></mark><small>');
+      $('#actual_price_category').html('View At End');
 
       Session.set('currBid', currentBrandID);
     }
