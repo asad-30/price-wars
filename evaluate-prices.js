@@ -11,7 +11,7 @@ if (Meteor.isClient) {
     'nextBrand': function(){
       Session.setDefault('currBid', 0);
       var myBID = Session.get('currBid');
-      return Brands.findOne({bid: String(arr[myBID])});
+      return Brands.findOne({bid: arr[myBID]});
     }
   });
 
@@ -28,7 +28,7 @@ if (Meteor.isClient) {
       $('#total-clicks').attr( 'style', 'width:' + String(currentBrandID/totalBrands * 100) + "%");
 
 
-      var previousBrand = Brands.findOne({bid: String(arr[currentBrandID])});
+      var previousBrand = Brands.findOne({bid: arr[currentBrandID]});
 
       var prevCount = Tasks.find({bid: arr[currentBrandID]});
       var econ_count = Tasks.find({bid: arr[currentBrandID], price_category: "Economy"}).count();
@@ -49,7 +49,7 @@ if (Meteor.isClient) {
         currentBrandID = 0;
       }
 
-      var currentBrand = Brands.findOne({bid: String(arr[currentBrandID])});
+      var currentBrand = Brands.findOne({bid: arr[currentBrandID]});
       console.log(currentBrand);
       console.log(previousBrand);
 

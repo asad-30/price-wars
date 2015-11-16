@@ -98,7 +98,7 @@
 
     $('#total-clicks').html( Tasks.find({}).count() + " clicks!");
     $('#total-clicks').attr( 'style', 'width:' + String( (Tasks.find({}).count()/totalGoal)*100) + "%");
-    var currentBrand = Brands.findOne({bid: String(arr[0])});
+    var currentBrand = Brands.findOne({bid: arr[0]});
 
     $("#prev-img").attr('src', currentBrand.img_url);
     $('#prev-name').html(currentBrand.name);
