@@ -9,9 +9,9 @@ if (Meteor.isClient) {
     },
 
     'nextBrand': function(){
-      Session.setDefault('currBid', 1);
+      Session.setDefault('currBid', 0);
       var myBID = Session.get('currBid');
-      return Brands.findOne({bid: String(myBID)});
+      return Brands.findOne({bid: String(arr[myBID])});
     }
   });
 
@@ -28,12 +28,12 @@ if (Meteor.isClient) {
       $('#total-clicks').attr( 'style', 'width:' + String(currentBrandID/totalBrands * 100) + "%");
 
 
-      var previousBrand = Brands.findOne({bid: currentBrandID});
+      var previousBrand = Brands.findOne({bid: String(arr[currentBrandID])});
 
-      var prevCount = Tasks.find({bid: currentBrandID});
-      var econ_count = Tasks.find({bid: currentBrandID, price_category: "Economy"}).count();
-      var ib_count = Tasks.find({bid: currentBrandID, price_category: "Premium"}).count();
-      var lux_count = Tasks.find({bid: currentBrandID, price_category: "Luxury"}).count();
+      var prevCount = Tasks.find({bid: arr[currentBrandID]});
+      var econ_count = Tasks.find({bid: arr[currentBrandID], price_category: "Economy"}).count();
+      var ib_count = Tasks.find({bid: arr[currentBrandID], price_category: "Premium"}).count();
+      var lux_count = Tasks.find({bid: arr[currentBrandID], price_category: "Luxury"}).count();
       var total_count = econ_count + ib_count + lux_count;
       $('#num-econ').html(econ_count);
       $('#num-ib').html(ib_count);
@@ -45,10 +45,14 @@ if (Meteor.isClient) {
 
       currentBrandID++;
 
-      if(currentBrandID >= Brands.find({}).count())
-        currentBrandID = 1;
+      if(currentBrandID >= Brands.find({}).count()-1) {
+        currentBrandID = 0;
+      }
 
-      var currentBrand = Brands.findOne({bid: currentBrandID});
+      var currentBrand = Brands.findOne({bid: String(arr[currentBrandID])});
+      console.log(currentBrand);
+      console.log(previousBrand);
+
       $("#curr-img").attr('src', currentBrand.blurred_img_url);
       $('#prev-img').attr('src', previousBrand.img_url);
       $('#prev-website-url').html(previousBrand.name);
