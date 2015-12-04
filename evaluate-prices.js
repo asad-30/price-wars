@@ -1,5 +1,8 @@
 Brands = new Mongo.Collection("brands");
 Tasks = new Mongo.Collection("tasks");
+NewBrands = new Mongo.Collection("newbrands");
+NewTasks = new Mongo.Collection("newtasks");
+
 var count = 0;
 
 if (Meteor.isClient) {
