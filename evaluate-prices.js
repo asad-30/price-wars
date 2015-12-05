@@ -21,8 +21,14 @@ if (Meteor.isClient) {
   Template.body.events({
     'click #submit_btn' : function() {
 
-      Tasks.insert({bid: currentBrandID, price_category: currentSliderValue});
-      var totalBrands = Brands.find({}).count();
+      if(extractFromRadio() === -1) {
+        alert("Please select a radio value from the 1-5 range to submit this task");
+        return;
+      }
+
+      var currentRadioValue = extractFromRadio();
+      Tasks.insert({bid: arr[currentBrandID], price_category: currentRadioValue});
+      var totalBrands = Brands.find({type: currentDomain}).count();
 
       $('#goal-text').html('Your Goal <small>' + String(totalBrands - currentBrandID) + ' clicks</small>');
       $('#total-clicks').html('');
@@ -34,9 +40,9 @@ if (Meteor.isClient) {
       var previousBrand = Brands.findOne({bid: arr[currentBrandID]});
 
       var prevCount = Tasks.find({bid: arr[currentBrandID]});
-      var econ_count = Tasks.find({bid: arr[currentBrandID], price_category: "Economy"}).count();
-      var ib_count = Tasks.find({bid: arr[currentBrandID], price_category: "Premium"}).count();
-      var lux_count = Tasks.find({bid: arr[currentBrandID], price_category: "Luxury"}).count();
+      var econ_count = Tasks.find({bid: arr[currentBrandID], price_category: 1}).count();
+      var ib_count = Tasks.find({bid: arr[currentBrandID], price_category: 3}).count();
+      var lux_count = Tasks.find({bid: arr[currentBrandID], price_category: 5}).count();
       var total_count = econ_count + ib_count + lux_count;
       $('#num-econ').html(econ_count);
       $('#num-ib').html(ib_count);
@@ -45,10 +51,9 @@ if (Meteor.isClient) {
       $('#progress-ib').attr( 'style', 'width:' + String(ib_count/total_count * 100) + "%");
       $('#progress-lux').attr( 'style', 'width:' + String(lux_count/total_count * 100) + "%");
 
-
       currentBrandID++;
 
-      if(currentBrandID >= Brands.find({}).count()-1) {
+      if(currentBrandID > Brands.find({type: currentDomain}).count()-1) {
         currentBrandID = 0;
       }
 
@@ -63,7 +68,31 @@ if (Meteor.isClient) {
       // $('#actual_price_category').html('<mark class="'+previousBrand.actual_price_category.toLowerCase()+'-label"><em>'+previousBrand.actual_price_category+'</em></mark><small>');
       $('#actual_price_category').html('View At End');
 
-      Session.set('currBid', currentBrandID);
+      Session.set('currBid', arr[currentBrandID]);
     }
   })
+}
+
+if (Meteor.isServer) {
+
+  Meteor.startup(function() {
+
+    return Meteor.methods({
+
+      removeAllBrands: function() {
+
+        return Brands.remove({});
+
+      },
+
+      removeAllTasks: function() {
+
+        return Tasks.remove({});
+
+      }
+
+    });
+
+  });
+
 }
